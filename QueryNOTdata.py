@@ -43,4 +43,4 @@ for j in range(0,len(t)):
 # print a list of targets and 
 # the number of spectra
 for i in sorted(target.keys()):
-	print i,len(target[i])
+	print "%s\t%d" % (i,len(target[i]))
