@@ -22,6 +22,7 @@ t=g.glob('NOT_20*')
 target=defaultdict(list)
 
 for j in range(0,len(t)):
+	print('Moving into %s' % (t[j]))
 	with cd('%s/fies/' % (t[j])):
 		t2=g.glob('FI*.fits*')
 		for i in range(0,len(t2)):
