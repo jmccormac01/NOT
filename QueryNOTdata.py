@@ -25,7 +25,7 @@ for j in range(0,len(t)):
 	with cd('%s/fies/' % (t[j])):
 		t2=g.glob('FI*.fits*')
 		for i in range(0,len(t2)):
-			with fits.open(l[i]) as hdu:
+			with fits.open(t2[i]) as hdu:
 				obj_id=hdu[0].header['TCSTGT']
 				target[obj_id].append(t2[i])
 
