@@ -1,21 +1,6 @@
-
-# ----------------------------------------------------------------------------------
-#								Description
-# ----------------------------------------------------------------------------------
-#
-# QueryNOTdata.py - 	a program to make a list of targets observed from NOT data 
-#	
-#							Version 1.00 (22/11/12)
-#
-
-# ----------------------------------------------------------------------------------
-# 								Update History
-# ----------------------------------------------------------------------------------
-# 05/06/09 - 	code writen
-# 05/06/09 -	code tested
-#
-# 11 Gb raw NOT data zipped
-#
+'''
+Script to make a list of objects from a bunch of NOT/FIES data
+'''
 
 import os
 import glob as g
@@ -35,7 +20,6 @@ for j in range(0,len(t)):
 			target[obj_id].append(t2[i])
 	os.chdir('../')
 				
-
 
 #f=open('%s/ObjectsObserved.txt' % (top_dir),'w')
 #for i in range(0,len(tar_list_n)):
