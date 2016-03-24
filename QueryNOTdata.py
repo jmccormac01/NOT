@@ -36,7 +36,7 @@ for j in range(0,len(t)):
 			with fits.open(t2[i]) as hdu:
 				obj_id=hdu[0].header['TCSTGT']
 				image_typ=hdu[0].header['IMAGETYP']
-				if image_typ='':
+				if image_typ=='':
 					target[obj_id].append(t2[i])
 				imagetyp[image_typ].append(t2[i])
 
