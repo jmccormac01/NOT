@@ -8,7 +8,7 @@ from astropy.io import fits
 from collections import defaultdict
 from contextlib import contextmanager
 
-@con­textman­ag­er 
+@contextmanager 
 def cd(path): 
 	old_dir = os.getcwd() 
 	os.chdir(path) 
