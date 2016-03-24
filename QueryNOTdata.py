@@ -40,12 +40,7 @@ for j in range(0,len(t)):
 					target[obj_id].append(t2[i])
 				imagetyp[image_typ].append(t2[i])
 
-#f=open('%s/ObjectsObserved.txt' % (top_dir),'w')
-#for i in range(0,len(tar_list_n)):
-#	f.write("%s    %s\n" % (tar_list_n[i],tar_count_n[i]))
-#	
-#f.close()
-#for i in target['J234318']:
-#	for j in imagetyp.keys():
-#		if i in imagetyp[j]:
-#			print i,j
+# print a list of targets and 
+# the number of spectra
+for i in sorted(target.keys()):
+	print i,len(target[i])
