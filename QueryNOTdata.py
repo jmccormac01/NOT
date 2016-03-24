@@ -12,8 +12,8 @@ t=g.glob('NOT_20*')
 target=defaultdict(list)
 
 for j in range(0,len(t)):
-	os.chdir('%s/fies/' % (t[j]))
-	t2=g.glob('FI*.fits')
+	os.chdir('%s/%s/fies/' % (top_dir,t[j]))
+	t2=g.glob('FI*.fits*')
 	for i in range(0,len(t2)):
 		with fits.open(l[i]) as hdu:
 			obj_id=hdu[0].header['TCSTGT']
