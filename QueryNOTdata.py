@@ -37,7 +37,7 @@ for j in range(0,len(t)):
                 obj_id=hdu[0].header['TCSTGT']
                 image_typ=hdu[0].header['IMAGETYP']
                 if image_typ=='':
-                    target[obj_id].append("{0:s}/{0:s}/{1:s}".format(top_dir,t[j],t2[i])
+                    target[obj_id].append("{0:s}/{0:s}/{1:s}".format(top_dir,t[j],t2[i]))
                 imagetyp[image_typ].append(t2[i])
 
 # print a list of targets and 
