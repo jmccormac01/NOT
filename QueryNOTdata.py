@@ -37,7 +37,8 @@ for j in range(0,len(t)):
                 obj_id=hdu[0].header['TCSTGT']
                 image_typ=hdu[0].header['IMAGETYP']
                 if image_typ=='':
-                    target[obj_id].append("{0:s}/{1:s}/{2:s}".format(top_dir,t[j],t2[i]))
+                    reduced_file = "{0:s}/{1:s}/reduced/{2:s}_step011_merge*".format(top_dir,t[j],t2[i].split('.')[0])
+                    target[obj_id].append(reduced_file)
                 imagetyp[image_typ].append(t2[i])
 
 # print a list of targets and 
