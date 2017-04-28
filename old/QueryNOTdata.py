@@ -15,33 +15,33 @@ from astropy.io import fits
 from collections import defaultdict
 from contextlib import contextmanager
 
-@contextmanager 
-def cd(path): 
-    old_dir = os.getcwd() 
-    os.chdir(path) 
+@contextmanager
+def cd(path):
+    old_dir = os.getcwd()
+    os.chdir(path)
     try:
-        yield 
+        yield
     finally:
-        os.chdir(old_dir) 
+        os.chdir(old_dir)
 
-top_dir=os.getcwd()
-t=g.glob('wd_20*')
-target=defaultdict(list)
-imagetyp=defaultdict(list)
-for j in range(0,len(t)):
+top_dir = os.getcwd()
+t = g.glob('wd_20*')
+target = defaultdict(list)
+imagetyp = defaultdict(list)
+for j in range(0, len(t)):
     print('Moving into %s' % (t[j]))
     with cd('%s/' % (t[j])):
-        t2=g.glob('FI*.fits*')
-        for i in range(0,len(t2)):
+        t2 = g.glob('FI*.fits*')
+        for i in range(0, len(t2)):
             with fits.open(t2[i]) as hdu:
-                obj_id=hdu[0].header['TCSTGT']
-                image_typ=hdu[0].header['IMAGETYP']
-                if image_typ=='':
-                    reduced_file = "{0:s}/{1:s}/reduced/{2:s}_step011_merge*".format(top_dir,t[j],t2[i].split('.')[0])
+                obj_id = hdu[0].header['TCSTGT']
+                image_typ = hdu[0].header['IMAGETYP']
+                if image_typ == '':
+                    reduced_file = "{0:s}/{1:s}/reduced/{2:s}_step011_merge*".format(top_dir, t[j], t2[i].split('.')[0])
                     target[obj_id].append(reduced_file)
                 imagetyp[image_typ].append(t2[i])
 
-# print a list of targets and 
+# print a list of targets and
 # the number of spectra
 for i in sorted(target.keys()):
-    print "%s\t%d" % (i,len(target[i]))
+    print "%s\t%d" % (i, len(target[i]))
