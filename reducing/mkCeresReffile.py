@@ -34,7 +34,7 @@ def openDB(host='localhost', database='eblm'):
     """
     """
     with pymysql.connect(host=host, database=database,
-                         user='James', password='mysqlpassword',
+                         user='jmcc', password='mysqlpassword',
                          cursorclass=pymysql.cursors.DictCursor) as cur:
         yield cur
 
@@ -125,7 +125,8 @@ def getCcfMask(st):
     Determine best CCF mask for RVs
     based on stars spectral type
     """
-    if st.lower().startswith('f') or st.lower().startswith('g'):
+    if st.lower().startswith('f') or st.lower().startswith('g') or \
+        st.lower().startswith('a') or st.lower().startswith('b'):
         return 'G2'
     elif st.lower().startswith('k'):
         return 'K5'
@@ -163,9 +164,11 @@ def getReffileInfo(object_id):
             FROM rv_standards
             WHERE object_id=%s
             """
+    print(qry, object_id)
     with openDB() as cur:
         cur.execute(qry, object_id)
         result = cur.fetchone()
+    print(result)
     if not object_id.startswith('HD'):
         mask = getCcfMask(result['paramfit_spec_type'])
     else:
@@ -180,7 +183,7 @@ def getReffileInfo(object_id):
 
 if __name__ == "__main__":
     args = argParse()
-    night = os.getcwd().split('_')[1]
+    night = os.getcwd().split('/')[-1].split('_')[1]
     print(night)
     templist = g.glob('FI*.fits')
     if args.filter:
@@ -196,7 +199,7 @@ if __name__ == "__main__":
                     target = target_orig.replace('EBLM', '')
                 elif 'EB' in target_orig:
                     target = target_orig.replace('EB', '')
-                elif target_orig.startswith('M'):
+                elif target_orig.startswith('M') or target_orig.startswith('G'):
                     target = target_orig[1:]
                 else:
                     target = target_orig
@@ -230,7 +233,7 @@ if __name__ == "__main__":
                                 unmatched[matches[0]['object_id']].append(image)
                         else:
                             print('No matches found for {}...'.format(target))
-                            unmatched[matches[0]['object_id']].append(image)
+                            unmatched[estimated_swasp_id].append(image)
                     else:
                         print('Skipping ancilary frame {}'.format(image))
                 # look for science targets
@@ -273,7 +276,7 @@ if __name__ == "__main__":
         for i, j in sorted(unmatched.items()):
             print(i, j)
         print("N_unmatched: {}".format(len(unmatched)))
-
+        print("For unmatched files update the TCSTGT keyword if in DB already")
     # make a reference file
     if args.reffile:
         reffile = OrderedDict()

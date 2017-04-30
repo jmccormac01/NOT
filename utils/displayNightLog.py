@@ -9,5 +9,6 @@ for image in filelist:
     hdr = fits.open(image)[0].header
     print("{} {} {} {}".format(image,
                                hdr['IMAGETYP'],
+                               hdr['OBJECT'],
                                hdr['TCSTGT'],
                                hdr['FIFMSKNM']))
